@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta author="Rick Deurloo">
+  <meta name="description" content="Website description">
+  <meta name="keywords" content="Website keywords">
+
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-thin.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-light.css">
+
+  <link rel="stylesheet" href="./styles/dist/css/style.css">
+
+  <title>Weather API</title>
+</head>
+<body>
+  
+  <header>
+    <h1>Weather App API</h1>
+    <div class="search">
+      <input type="text" id="searchbar" name="searchbar" placeholder="Search for a city" onkeypress="handleKeyPress(event)">
+      <i class="far fa-magnifying-glass" onclick="getWeather()"></i>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="top-wrapper">
+      <div class="current-weather">
+        <div class="weather-icon" id="weather-icon"></div>
+        <div class="temperature"><span id="temperature">-</span>C°</div>
+      </div>
+      <div class="more-weather-info">
+        <h2 class="cityname" id="cityname">City</h2>
+        <div class="item-wrapper">
+          <div class="humidity">Humidity: <span id="humidity">-</span></div>
+          <div class="change-of-rain">Chance of rain: <span id="rain-chance">-</span></div>
+          <div class="feels-like">Feels like: <span id="feels-like">-</span></div>
+          <div class="wind-speed">Wind speed: <span id="wind-speed">-</span></div>
+          <div class="sunrise">Sunrise: <span id="sunrise">-</span></div>
+          <div class="sunset">Sunset: <span id="sunset">-</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-wrapper">
+      <div class="forecast">
+        <div class="day" id="day1"></div>
+        <div class="day" id="day2"></div>
+        <div class="day" id="day3"></div>
+        <div class="day" id="day4"></div>
+        <div class="day" id="day5"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="./js/general.js"></script>
+</body>
+</html>
