@@ -11,10 +11,11 @@ async function getWeather() {
 
     if (weatherData.cod === 200) {
       document.getElementById('cityname').innerText = weatherData.name;
-      document.getElementById('temperature').innerText = weatherData.main.temp;
+      document.getElementById('countryname').innerText = weatherData.sys.country;
+      document.getElementById('temperature').innerText = Math.round(weatherData.main.temp);
       document.getElementById('humidity').innerText = `${weatherData.main.humidity}%`;
-      document.getElementById('feels-like').innerText = `${weatherData.main.feels_like}C°`;
-      document.getElementById('wind-speed').innerText = `${weatherData.wind.speed} km/u`;
+      document.getElementById('feels-like').innerText = `${Math.round(weatherData.main.feels_like)}c°`;
+      document.getElementById('wind-speed').innerText = `${Math.round(weatherData.wind.speed)} km/u`;
       document.getElementById('weather-icon').innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png" width="100" height="100" alt="Weather icon">`;
 
       // Convert sunrise and sunset from UNIX timestamp to readable time
@@ -30,21 +31,21 @@ async function getWeather() {
     const forecastData = await forecastResponse.json();
 
     if (forecastData.cod === "200") {
-      const rainChance = forecastData.list[0].pop * 100; // Probability of precipitation for the next interval
+      const rainChance = forecastData.list[0].pop * 100;
       document.getElementById('rain-chance').innerText = `${rainChance}%`;
 
       const forecastElements = ['day1', 'day2', 'day3', 'day4', 'day5'];
       for (let i = 0; i < 5; i++) {
-        const forecast = forecastData.list[i * 8]; // 8 intervals per day
+        const forecast = forecastData.list[i * 8];
         const date = new Date(forecast.dt * 1000);
         const day = date.toLocaleDateString('en-US', { weekday: 'long' });
-        const temp = forecast.main.temp;
+        const temp = Math.round(forecast.main.temp);
         const icon = forecast.weather[0].icon;
 
         document.getElementById(forecastElements[i]).innerHTML = `
           <div>${day}</div>
-          <div><img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather icon"></div>
-          <div>${temp}C°</div>
+          <div><img src="http://openweathermap.org/img/wn/${icon}.png" width="50" height="50" alt="Weather icon"></div>
+          <div>${temp}c°</div>
         `;
       }
     } else {
