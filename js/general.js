@@ -1,5 +1,11 @@
 const apiKey = '4f91d01bf628ee6b33156de0a0248545';
 
+function getWindDirection(degree) {
+  const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+  const index = Math.round(degree / 45) % 8;
+  return directions[index];
+}
+
 async function getWeather() {
   const city = document.getElementById('searchbar').value;
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -13,7 +19,7 @@ async function getWeather() {
       document.getElementById('cityname').innerText = weatherData.name;
       document.getElementById('countryname').innerText = weatherData.sys.country;
       document.getElementById('temperature').innerText = Math.round(weatherData.main.temp);
-      document.getElementById('humidity').innerText = `${weatherData.main.humidity}%`;
+      document.getElementById('wind-direction').innerText = getWindDirection(weatherData.wind.deg); // Updated line
       document.getElementById('feels-like').innerText = `${Math.round(weatherData.main.feels_like)}c°`;
       document.getElementById('wind-speed').innerText = `${Math.round(weatherData.wind.speed)} km/u`;
       document.getElementById('weather-icon').innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png" width="100" height="100" alt="Weather icon">`;
